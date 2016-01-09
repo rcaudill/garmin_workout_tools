@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Garmin Workout Tools</title>
+</head>
+<body>
+
+  <style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        
+        text-align:left;
+        vertical-align:top;   
+    }
+  </style>
+
+  <h3>1. Enter Garmin Connect Login Information</h3>
+  <form method=post action='cgi-bin/workoutlist.py' id='form'>
+    Username:<br>
+    <input type="text" name="username">
+    <br>
+    Password:<br>
+    <input type="password" name="password">
+    <br>
+
+    <h3>2. Choose Proceedure</h3>
+    <table>
+      <tr>
+        <td>View/Download Workouts:</td>
+        <td>
+          <input type="submit" name="action" value="View Workouts" />
+        </td>
+      </tr>
+      <tr>
+        <td>Upload Workout:</td>
+        <td>  
+          Choose File:
+          <input type="file" onchange="onFileSelected(event)">
+          <div id='edit_field'>
+            Edit Workout if Desired:
+            <br>
+            <textarea id="result" name="result" rows="1" cols="80" form="form"></textarea>
+          </div>
+          <br>
+          <input type="submit" name="action" value="Upload Workout" />
+        </td>    
+      </tr>
+    </table>
+
+  </form>
+
+<script>
+  function onFileSelected(event) {
+    var selectedFile = event.target.files[0];
+    var reader = new FileReader();
+
+    var result = document.getElementById("result");
+
+    reader.onload = function(event) {
+      result.innerHTML = event.target.result;
+      result.rows = "20";
+      result.cols = "80";
+    };
+
+    reader.readAsText(selectedFile);
+    
+    show(document.getElementById('edit_field'));
+  }
+
+  function hide (elements) {
+    elements = elements.length ? elements : [elements];
+    for (var index = 0; index < elements.length; index++) {
+      elements[index].style.display = 'none';
+    }
+  }
+
+  function show (elements, specifiedDisplay) {
+    elements = elements.length ? elements : [elements];
+    for (var index = 0; index < elements.length; index++) {
+      elements[index].style.display = specifiedDisplay || 'block';
+    }
+  }
+
+  window.onload = hide(document.getElementById('edit_field'));
+</script>
+</body>
+</html>
+
