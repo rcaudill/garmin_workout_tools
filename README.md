@@ -1,2 +1,2 @@
 # garmin_workout_tools
-A tool to view, download, and upload Garmin workouts
+Deprecated - Use https://github.com/rcaudill/flask-garmin_workouts_tool
